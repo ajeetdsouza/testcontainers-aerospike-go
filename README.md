@@ -1,7 +1,19 @@
+<!-- markdownlint-configure-file {
+  "MD033": false,
+  "MD041": false
+} -->
+
+<div align="center">
+
 # testcontainers-aerospike-go
 
-Go library for [Aerospike](https://aerospike.com/) integration testing via
-[Testcontainers](https://testcontainers.com/).
+[![Go Reference](https://pkg.go.dev/badge/github.com/ajeetdsouza/testcontainers-aerospike-go.svg)](https://pkg.go.dev/github.com/ajeetdsouza/testcontainers-aerospike-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ajeetdsouza/testcontainers-aerospike-go)](https://goreportcard.com/report/github.com/ajeetdsouza/testcontainers-aerospike-go)
+
+Go library for **[Aerospike](https://aerospike.com/) integration testing via
+[Testcontainers](https://testcontainers.com/)**.
+
+</div>
 
 ## Example
 
