@@ -15,7 +15,15 @@ Go library for **[Aerospike](https://aerospike.com/) integration testing via
 
 </div>
 
-## Example
+## Install
+
+Use `go get` to install the latest version of the library.
+
+```bash
+go get -u github.com/ajeetdsouza/testcontainers-aerospike-go@latest
+```
+
+## Usage
 
 ```go
 import (
