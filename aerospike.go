@@ -40,7 +40,7 @@ func RunContainer(ctx context.Context, opts ...testcontainers.ContainerCustomize
 }
 
 // Port returns the port on which the Aerospike container is listening.
-func (c AerospikeContainer) Port(ctx context.Context) (int, error) {
+func (c AerospikeContainer) ServicePort(ctx context.Context) (int, error) {
 	port, err := c.Container.MappedPort(ctx, aerospikeServicePort)
 	if err != nil {
 		return 0, err

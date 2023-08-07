@@ -20,7 +20,7 @@ func TestPut(t *testing.T) {
 
 	host, err := container.Host(ctx)
 	require.NoErrorf(t, err, "failed to fetch Aerospike host")
-	port, err := container.Port(ctx)
+	port, err := container.ServicePort(ctx)
 	require.NoErrorf(t, err, "failed to fetch Aerospike port")
 
 	client, err := aerospike.NewClient(host, port)

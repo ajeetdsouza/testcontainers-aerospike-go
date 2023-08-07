@@ -52,7 +52,7 @@ func setupAerospike(t *testing.T) *aero.Client {
 
     host, err := container.Host(ctx)
     require.NoError(t, err)
-    port, err := container.Port(ctx)
+    port, err := container.ServicePort(ctx)
     require.NoError(t, err)
 
     client, err := aero.NewClient(host, port)
