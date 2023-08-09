@@ -69,7 +69,7 @@ func (s aerospikeWaitStrategy) isReady(host string, port int) (bool, error) {
 		} else {
 			return false, fmt.Errorf("failed to connect to Aerospike: %w", err)
 		}
-	} else {
-		return client.IsConnected(), nil
 	}
+	defer client.Close()
+	return client.IsConnected(), nil
 }
