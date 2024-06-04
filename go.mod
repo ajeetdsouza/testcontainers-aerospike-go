@@ -1,4 +1,4 @@
-module github.com/ajeetdsouza/testcontainers-aerospike-go
+module github.com/steven-eckhoff/testcontainers-aerospike-go
 
 go 1.21
 
