@@ -28,7 +28,9 @@ func RunContainer(ctx context.Context, opts ...testcontainers.ContainerCustomize
 		Started:          true,
 	}
 	for _, opt := range opts {
-		opt.Customize(&genericContainerRequest)
+		if err := opt.Customize(&genericContainerRequest); err != nil {
+			return nil, fmt.Errorf("failed to apply option: %w", err)
+		}
 	}
 
 	container, err := testcontainers.GenericContainer(ctx, genericContainerRequest)
@@ -56,10 +58,12 @@ func WithImage(image string) testcontainers.CustomizeRequestOption {
 // WithNamespace sets the default namespace that is created when Aerospike
 // starts. By default, this is set to "test".
 func WithNamespace(namespace string) testcontainers.CustomizeRequestOption {
-	return func(req *testcontainers.GenericContainerRequest) {
+	return func(req *testcontainers.GenericContainerRequest) error {
 		if req.Env == nil {
 			req.Env = make(map[string]string)
 		}
 		req.Env["NAMESPACE"] = namespace
+
+		return nil
 	}
 }
