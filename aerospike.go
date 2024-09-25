@@ -28,7 +28,9 @@ func RunContainer(ctx context.Context, opts ...testcontainers.ContainerCustomize
 		Started:          true,
 	}
 	for _, opt := range opts {
-		_ = opt.Customize(&genericContainerRequest)
+		if err := opt.Customize(&genericContainerRequest); err != nil {
+			return nil, fmt.Errorf("failed to apply option: %w", err)
+		}
 	}
 
 	container, err := testcontainers.GenericContainer(ctx, genericContainerRequest)
