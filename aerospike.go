@@ -8,8 +8,9 @@ import (
 )
 
 const (
-	aerospikeServicePort  = "3000/tcp"
-	defaultAerospikeImage = "aerospike:ce-6.4.0.0"
+	aerospikeServicePort     = "3000/tcp"
+	communityAerospikeImage  = "aerospike/aerospike-server:8.0"
+	enterpriseAerospikeImage = "aerospike/aerospike-server-enterprise:8.0"
 )
 
 type AerospikeContainer struct {
@@ -19,14 +20,16 @@ type AerospikeContainer struct {
 // RunContainer creates an instance of the Aerospike container type.
 func RunContainer(ctx context.Context, opts ...testcontainers.ContainerCustomizer) (*AerospikeContainer, error) {
 	containerRequest := testcontainers.ContainerRequest{
-		Image:        defaultAerospikeImage,
+		Image:        communityAerospikeImage,
 		ExposedPorts: []string{"3000/tcp"},
 		WaitingFor:   newAerospikeWaitStrategy(),
 	}
+
 	genericContainerRequest := testcontainers.GenericContainerRequest{
 		ContainerRequest: containerRequest,
 		Started:          true,
 	}
+
 	for _, opt := range opts {
 		if err := opt.Customize(&genericContainerRequest); err != nil {
 			return nil, fmt.Errorf("failed to apply option: %w", err)
@@ -55,6 +58,11 @@ func WithImage(image string) testcontainers.CustomizeRequestOption {
 	return testcontainers.WithImage(image)
 }
 
+// WithEnterpriseEdition() sets the image to the enterprise edition of Aerospike.
+func WithEnterpriseEdition() testcontainers.CustomizeRequestOption {
+	return WithImage(enterpriseAerospikeImage)
+}
+
 // WithNamespace sets the default namespace that is created when Aerospike
 // starts. By default, this is set to "test".
 func WithNamespace(namespace string) testcontainers.CustomizeRequestOption {
@@ -63,6 +71,17 @@ func WithNamespace(namespace string) testcontainers.CustomizeRequestOption {
 			req.Env = make(map[string]string)
 		}
 		req.Env["NAMESPACE"] = namespace
+
+		return nil
+	}
+}
+
+func WithLogLevel(logLevel string) testcontainers.CustomizeRequestOption {
+	return func(req *testcontainers.GenericContainerRequest) error {
+		if req.Env == nil {
+			req.Env = make(map[string]string)
+		}
+		req.Env["AEROSPIKE_LOG_LEVEL"] = logLevel
 
 		return nil
 	}

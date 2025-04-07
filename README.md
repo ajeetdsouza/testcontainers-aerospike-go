@@ -31,7 +31,7 @@ import (
     "testing"
 
     "github.com/stretchr/testify/require"
-    aero "github.com/aerospike/aerospike-client-go/v6"
+    aero "github.com/aerospike/aerospike-client-go/v8"
     aeroTest "github.com/ajeetdsouza/testcontainers-aerospike-go"
 )
 

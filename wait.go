@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aerospike/aerospike-client-go/v6"
-	"github.com/aerospike/aerospike-client-go/v6/types"
+	"github.com/aerospike/aerospike-client-go/v8"
+	"github.com/aerospike/aerospike-client-go/v8/types"
 	"github.com/testcontainers/testcontainers-go/wait"
 )
 
