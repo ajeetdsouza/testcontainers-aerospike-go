@@ -15,6 +15,9 @@ Go library for **[Aerospike](https://aerospike.com/) integration testing via
 
 </div>
 
+> [!WARNING]
+> This repo is archived. Please use the [official Aerospike module](https://testcontainers.com/modules/aerospike) instead.
+
 ## Install
 
 Use `go get` to install the latest version of the library.
